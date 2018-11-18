@@ -1,8 +1,60 @@
 #include "functions.h"
 
+float PtoX(float data[], int length, int indexOfdataP) {
+	float end, first, second;
+	float dataMean = mean(data, length, indexOfdataP);
+	float SD = calculateSD(data, length, indexOfdataP);
+	float SDsquared = ldexp(SD, 2);
+	float top = ldexp((data[indexOfdataP] - dataMean), 2);
+
+	first = 1 / (sqrt(2 * M_PI*(SDsquared)));
+	second = exp(-top / (2 * SDsquared));
+	end = first * second;
+
+	return end;
+}
+
+float calculateSD(float data[], int num, int dataPoint) {
+	float sumData = 0.0, mean, standardDeviation = 0.0;
+
+	int i;
+
+	sumData = sum(data, num) - data[dataPoint];
+	num -= 1;
+	mean = sumData / num;
+
+	for (i = 0; i<num; ++i) {
+		standardDeviation += pow(data[i] - mean, 2);
+	}
+
+	return sqrt(standardDeviation / num);
+
+}
+
+float mean(float data[], int num, int dataPoint) {
+	float sumData, mean;
+
+	sumData = sum(data, num) - data[dataPoint];
+	num -= 1;
+	mean = sumData / num;
+
+	return mean;
+}
+
+float sum(float data[], int num) {
+	int i; int sum;
+	for (i = 0; i<num; ++i)
+	{
+		sum += data[i];
+	}
+
+
+	return sum;
+}
+
 void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[][4], float virginicaData[][4]) {
 	rewind(infile);
-	
+
 	float x1;
 	float x2;
 	float x3;
@@ -48,35 +100,4 @@ void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[]
 		}
 		i++;
 	}
-}
-
-float calculateSD(float data[], int num) {
-	float sum = 0.0;
-	float mean;
-	float standardDeviation = 0.0;
-
-	for (int i = 0; i < num; ++i) {
-		sum += data[i];
-	}
-
-	mean = sum / num;
-
-	for (int i = 0; i < num; ++i) {
-		standardDeviation += pow(data[i] - mean, 2);
-	}
-
-	return sqrt(standardDeviation / num);
-}
-
-float mean(float data[], int num) {
-	int i; 
-	int sum;
-	float mean;
-
-	for (i = 0; i < num; ++i) {
-		sum += data[i];
-	}
-
-	mean = sum / num;
-	return mean;
 }

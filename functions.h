@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define M_PI 3.14159265358979323846
+
 /* getDataFromFile()
 * Parameters:
 	FILE *infile: a pointer to the file containing the data set
@@ -19,11 +21,21 @@ void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[]
 /*
 	Function under construction
 */
-float calculateSD(float data[], int num);
+float calculateSD(float data[], int num, int dataPoint);
 
 /*
 Function under construction
 */
-float mean(float data[], int num);
+float mean(float data[], int num, int dataPoint);
+
+/*
+Function under construction
+*/
+float sum(float data[], int num);
+
+/*
+Function under construction
+*/
+float PtoX(float data[], int length, int indexOfdataP);
 
 #endif
