@@ -30,7 +30,7 @@ float calculateSD(float data[], int num) {
 
 
 // Author: Oliver Hamburger
-float PtoX(float data[][4], int sizeData, int indexOfdataP, int attributeIndex) {
+float PtoX(float data[][4], int sizeData, int indexOfDataP, int attributeIndex) {
 	// Create temp array to hold all values for a certain dataset and 
 	//	 certain attribute except the value currently being tested
 	int sizeTemp = sizeData - 1;
