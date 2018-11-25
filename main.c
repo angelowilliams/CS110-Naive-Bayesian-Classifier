@@ -2,6 +2,7 @@
 
 const _Bool DEBUG_MODE = 1;
 
+// Author: Oliver Hamburger, Tom Kang, Angelo Williams
 int main(){
 	FILE *infile;
 	infile = fopen("Data.txt", "r");
@@ -53,6 +54,13 @@ int main(){
 		for (int i = 0; i < 50; ++i) {
 			printf("%f %f %f %f %s\n", virginicaData[i][0], virginicaData[i][1], virginicaData[i][2], virginicaData[i][3], "Irisvirginica");
 		}
+
+		int index = 0;
+		//for all the ptox values, loop through index 0-49
+		printf("%f\n", PtoX(setosaData, setosaCount, index, 0));
+		printf("%f\n", PtoX(setosaData, setosaCount, index, 1));
+		printf("%f\n", PtoX(setosaData, setosaCount, index, 2));
+		printf("%f\n", PtoX(setosaData, setosaCount, index, 3));
 	}
 
 	/*
@@ -78,31 +86,6 @@ int main(){
 	p(x|a) = p(x1|a)p(x2|a)p(x3|a)p(x4|a)
 	p(x|b) = p(x1|b)p(x2|b)p(x3|b)p(x4|b)
 	p(x|c) = p(x1|c)p(x2|c)p(x3|c)p(x4|c) 
-	*/
-	
-	
-	
-	
-	
-	/*
-	for(int k = 0; k < 50; k++){
-		printf("%.1f ", x1Setosa[k]);
-		printf("%.1f ", x2Setosa[k]);
-		printf("%.1f ", x3Setosa[k]);
-		printf("%.1f\n", x4Setosa[k]);
-	}
-	for(int k = 0; k < 50; k++){
-		printf("%.1f ", x1Versicolor[k]);
-		printf("%.1f ", x2Versicolor[k]);
-		printf("%.1f ", x3Versicolor[k]);
-		printf("%.1f\n", x4Versicolor[k]);
-	}
-	for(int k = 0; k < 50; k++){
-		printf("%.1f ", x1Virginica[k]);
-		printf("%.1f ", x2Virginica[k]);
-		printf("%.1f ", x3Virginica[k]);
-		printf("%.1f\n", x4Virginica[k]);
-	}
 	*/
 	
 	return 0;
