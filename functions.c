@@ -1,11 +1,59 @@
 #include "functions.h"
 
-float PtoX(float data[], int length, int indexOfdataP) {
+// Author: Tom Kang
+float mean(float data[], int num) {
+	float sumData, mean;
+
+	for (int i = 0; i<num; ++i) {
+		sumData += data[i];
+	}
+
+	mean = sumData / num;
+
+	return mean;
+}
+
+
+// Author: Tom Kang, Oliver Hamburger
+float calculateSD(float data[], int num) {
+	float meanData, standardDeviation = 0.0;
+	int i;
+
+	meanData = mean(data, num);
+
+	for (i = 0; i<num; ++i) {
+		standardDeviation += pow(data[i] - meanData, 2);
+	}
+
+	return sqrt(standardDeviation / num);
+}
+
+
+// Author: Oliver Hamburger
+float PtoX(float data[][4], int sizeData, int indexOfdataP, int attributeIndex) {
+	// Create temp array to hold all values for a certain dataset and 
+	//	 certain attribute except the value currently being tested
+	int sizeTemp = sizeData - 1;
+	float temp[sizeTemp];
+
+	// Populate temp array
+	int tempCounter = 0;
+	for (int i = 0; i < sizeData; i++) {
+		if (i != indexOfDataP) {
+			temp[tempCounter] = data[i][attributeIndex];
+			++tempCounter;
+		}
+	}
+
 	float end, first, second;
-	float dataMean = mean(data, length, indexOfdataP);
-	float SD = calculateSD(data, length, indexOfdataP);
+
+	// Calculate mean and SD
+	float dataMean = mean(temp, sizeTemp);
+	float SD = calculateSD(temp, sizeTemp);
+
+	// Calculate PofX
 	float SDsquared = ldexp(SD, 2);
-	float top = ldexp((data[indexOfdataP] - dataMean), 2);
+	float top = ldexp((data[indexOfDataP][attributeIndex] - dataMean), 2);
 
 	first = 1 / (sqrt(2 * M_PI*(SDsquared)));
 	second = exp(-top / (2 * SDsquared));
@@ -14,44 +62,8 @@ float PtoX(float data[], int length, int indexOfdataP) {
 	return end;
 }
 
-float calculateSD(float data[], int num, int dataPoint) {
-	float sumData = 0.0, mean, standardDeviation = 0.0;
 
-	int i;
-
-	sumData = sum(data, num) - data[dataPoint];
-	num -= 1;
-	mean = sumData / num;
-
-	for (i = 0; i<num; ++i) {
-		standardDeviation += pow(data[i] - mean, 2);
-	}
-
-	return sqrt(standardDeviation / num);
-
-}
-
-float mean(float data[], int num, int dataPoint) {
-	float sumData, mean;
-
-	sumData = sum(data, num) - data[dataPoint];
-	num -= 1;
-	mean = sumData / num;
-
-	return mean;
-}
-
-float sum(float data[], int num) {
-	int i; int sum;
-	for (i = 0; i<num; ++i)
-	{
-		sum += data[i];
-	}
-
-
-	return sum;
-}
-
+// Author: Angelo Williams
 void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[][4], float virginicaData[][4]) {
 	rewind(infile);
 
