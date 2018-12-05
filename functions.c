@@ -167,27 +167,27 @@ void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[]
 	// Scan through file and add data points to their respective data set
 	// Increment the various counters as their data points are parsed
 	while (!feof(infile)) {
-		fscanf(infile, "%f", &x1);
-		fscanf(infile, "%f", &x2);
-		fscanf(infile, "%f", &x3);
-		fscanf(infile, "%f", &x4);
-		fscanf(infile, "%s", name);
+		fscanf(infile, "%f,", &x1);
+		fscanf(infile, "%f,", &x2);
+		fscanf(infile, "%f,", &x3);
+		fscanf(infile, "%f,", &x4);
+		fscanf(infile, "%s\n", name);
 
-		if (strcmp(name, "Irissetosa") == 0) {
+		if (strcmp(name, "Iris-setosa") == 0) {
 			setosaData[setosaCount][0] = x1;
 			setosaData[setosaCount][1] = x2;
 			setosaData[setosaCount][2] = x3;
 			setosaData[setosaCount][3] = x4;
 			++setosaCount;
 		}
-		else if (strcmp(name, "Irisversicolor") == 0) {
+		else if (strcmp(name, "Iris-versicolor") == 0) {
 			versicolorData[versicolorCount][0] = x1;
 			versicolorData[versicolorCount][1] = x2;
 			versicolorData[versicolorCount][2] = x3;
 			versicolorData[versicolorCount][3] = x4;
 			++versicolorCount;
 		}
-		else if (strcmp(name, "Irisvirginica") == 0) {
+		else if (strcmp(name, "Iris-virginica") == 0) {
 			virginicaData[virginicaCount][0] = x1;
 			virginicaData[virginicaCount][1] = x2;
 			virginicaData[virginicaCount][2] = x3;

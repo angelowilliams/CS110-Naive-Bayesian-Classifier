@@ -15,19 +15,19 @@ int main(){
 
 	// Prepare the data file to be parsed
 	while (!feof(infile)) {
-		fscanf(infile, "%f", &temp);
-		fscanf(infile, "%f", &temp);
-		fscanf(infile, "%f", &temp);
-		fscanf(infile, "%f", &temp);
-		fscanf(infile, "%s", name);
+		fscanf(infile, "%f,", &temp);
+		fscanf(infile, "%f,", &temp);
+		fscanf(infile, "%f,", &temp);
+		fscanf(infile, "%f,", &temp);
+		fscanf(infile, "%s\n", name);
 
-		if (strcmp(name, "Irissetosa") == 0) {
+		if (strcmp(name, "Iris-setosa") == 0) {
 			++setosaCount;
 		}
-		else if (strcmp(name, "Irisversicolor") == 0) {
+		else if (strcmp(name, "Iris-versicolor") == 0) {
 			++versicolorCount;
 		}
-		else if (strcmp(name, "Irisvirginica") == 0) {
+		else if (strcmp(name, "Iris-virginica") == 0) {
 			++virginicaCount;
 		}
 		else {
