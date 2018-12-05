@@ -3,7 +3,7 @@
 // Author: Oliver Hamburger, Tom Kang, Angelo Williams
 int main(){
 	FILE *infile;
-	infile = fopen("Data.txt", "r");
+	infile = fopen("iris.data", "r");
 	
 	int setosaCount = 0;
 	int versicolorCount = 0;

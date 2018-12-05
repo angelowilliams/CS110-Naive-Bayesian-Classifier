@@ -106,49 +106,48 @@ float getClassProb(float dataToTestAgainst[][4], float dataToTakePointFrom[][4],
 
 // Author: Tom Kang, Angelo Williams
 int totalProb(float dataToTakePointFrom[][4], int indexOfDataP,
-				float setosaData[][4], float versicolorData[][4], 
-				float virginicaData[][4], int setosaCount, int versicolorCount,
-				int virginicaCount, int totalCount, int setFlag) {
-	float setosaProb, versicolorProb, virginicaProb;
-	int result;
-	
-	// Lower total count by one since the sample being tested is not being tested against
-	totalCount -= 1;
-	bool pointInSetosa, pointInVersicolor, pointInVirginica = false;
+float setosaData[][4], float versicolorData[][4],
+float virginicaData[][4], int setosaCount, int versicolorCount,
+int virginicaCount, int totalCount, int setFlag) {
+float setosaProb, versicolorProb, virginicaProb;
+int result;
 
-	// Set the bool of the corresponding data set to true if the data point is in that set
-	// Lower the count for that set by one since a sample from that set is being tested
-	if (setFlag == 1) {
-		pointInSetosa = true;
-		setosaCount -= 1;
-	}
-	else if (setFlag == 2) {
-		pointInVersicolor = true;
-		versicolorCount -= 1;
-	}
-	else if (setFlag == 3) {
-		pointInVirginica = true;
-		virginicaCount -= 1;
-	}
+// Lower total count by one since the sample being tested is not being tested against
+totalCount -= 1;
+bool pointInSetosa, pointInVersicolor, pointInVirginica = false;
 
-	// Calculate the probability that the data point is a setosa
-	setosaProb = getClassProb(setosaData, dataToTakePointFrom, setosaCount, indexOfDataP, pointInSetosa);
-	setosaProb *= ((float)setosaCount / (float)totalCount);
-
-	// Calculate the probability that the data point is a versicolor
-	versicolorProb = getClassProb(versicolorData, dataToTakePointFrom, versicolorCount, indexOfDataP, pointInVersicolor);
-	versicolorProb *= ((float)versicolorCount / (float)totalCount);
-
-	// Calculate the probability that the data point is a virginica
-	virginicaProb = getClassProb(virginicaData, dataToTakePointFrom, virginicaCount, indexOfDataP, pointInVirginica);
-	virginicaProb *= ((float)virginicaCount / (float)virginicaCount);
-
-	// Find the largest of these three probabilities
-	result = compare(setosaProb, versicolorProb, virginicaProb);
-
-	return result;
+// Set the bool of the corresponding data set to true if the data point is in that set
+// Lower the count for that set by one since a sample from that set is being tested
+if (setFlag == 1) {
+pointInSetosa = true;
+setosaCount -= 1;
+}
+else if (setFlag == 2) {
+pointInVersicolor = true;
+versicolorCount -= 1;
+}
+else if (setFlag == 3) {
+pointInVirginica = true;
+virginicaCount -= 1;
 }
 
+// Calculate the probability that the data point is a setosa
+setosaProb = getClassProb(setosaData, dataToTakePointFrom, setosaCount, indexOfDataP, pointInSetosa);
+setosaProb *= ((float)setosaCount / (float)totalCount);
+
+// Calculate the probability that the data point is a versicolor
+versicolorProb = getClassProb(versicolorData, dataToTakePointFrom, versicolorCount, indexOfDataP, pointInVersicolor);
+versicolorProb *= ((float)versicolorCount / (float)totalCount);
+
+// Calculate the probability that the data point is a virginica
+virginicaProb = getClassProb(virginicaData, dataToTakePointFrom, virginicaCount, indexOfDataP, pointInVirginica);
+virginicaProb *= ((float)virginicaCount / (float)totalCount);
+
+// Find the largest of these three probabilities
+result = compare(setosaProb, versicolorProb, virginicaProb);
+
+return result;
+}
 
 // Author: Angelo Williams
 void getDataFromFile(FILE *infile, float setosaData[][4], float versicolorData[][4], float virginicaData[][4]) {
